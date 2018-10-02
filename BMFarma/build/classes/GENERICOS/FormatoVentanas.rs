@@ -1,0 +1,2 @@
+genericos.FormatoVentanas$tipoVentana
+genericos.FormatoVentanas

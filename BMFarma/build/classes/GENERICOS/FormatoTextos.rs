@@ -1,0 +1,3 @@
+Genericos.FormatoTextos
+Genericos.FormatoTextos$asignarPropiedades
+Genericos.FormatoTextos$formatoTexto
