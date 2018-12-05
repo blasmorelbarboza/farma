@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/BMFarma/src/CONTROL/ComprasCtrol.java</file>
-            <file>file:/C:/BMFarma/src/FORMULARIOS/Compras.java</file>
-            <file>file:/C:/BMFarma/src/FORMULARIOS/CentralInformes.java</file>
-            <file>file:/C:/BMFarma/src/GENERICOS/ListarReportes.java</file>
+            <file>file:/C:/git/farma/BMFarma/src/CONTROL/ComprasCtrol.java</file>
+            <file>file:/C:/git/farma/BMFarma/src/FORMULARIOS/Compras.java</file>
+            <file>file:/C:/git/farma/BMFarma/src/GENERICOS/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

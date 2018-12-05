@@ -9,13 +9,22 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+/**
+ * <h1>Compras</h1>
+ * Clase Compras extiende de JDialog y es controlada por la Clase ComprasCtrol <p>
+ * En ella todos los Objetos del formulario son publicos 
+ * segun el Patron MVC
+ */
 
 public class Compras extends javax.swing.JDialog {
 
+    
     private ComprasCtrol ctrolCompras;
     private FormatoVentanas ventanaCabecera;
 
     public Compras(java.awt.Frame parent, boolean modal) {
+        
+        
         super(parent, modal);
 try {
         initComponents();
@@ -641,6 +650,7 @@ try {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar Compra?", "ATENCION", JOptionPane.YES_NO_OPTION);
+        int a=1;
         if (mensaje == JOptionPane.YES_OPTION) {
             try {
                 ctrolCompras.altaCabecera();

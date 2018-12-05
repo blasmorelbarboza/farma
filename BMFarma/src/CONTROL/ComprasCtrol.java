@@ -30,7 +30,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
-
+/**
+ *<h1>ComprasCtrol</h1>
+ * Es el COntrolador del Formulario Compras
+ * 
+ */
 public class ComprasCtrol {
 
     private Compras Compra;
