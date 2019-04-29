@@ -1,0 +1,3 @@
+genericos.FormatoBotones
+genericos.FormatoBotones$propiedadesBotones
+genericos.FormatoBotones$opcionesBotones
