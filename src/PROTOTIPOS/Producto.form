@@ -69,9 +69,12 @@
                       <Component id="jTextField3" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                       <Component id="jTextField11" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                       <Component id="jTextField12" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField18" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
-                      <Component id="jTextField15" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jTextField15" min="-2" pref="78" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextField1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="jComboBox2" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="jComboBox1" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="jTextField13" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
@@ -160,10 +163,8 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jFormattedTextField1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel14" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -195,7 +196,10 @@
                                       <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jTextField15" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jTextField15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
@@ -319,7 +323,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="SUPERVISION VENTA"/>
+            <Property name="text" type="java.lang.String" value="VENTA BAJO CONTROL"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
