@@ -26,6 +26,36 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+/BMFarma/dist/
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbproject/
+test/
+build.xml
+manifest.mf
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
 # End of https://www.gitignore.io/api/java
-/BMFarma/dist/
+
+
+## bm gitignore.io
+
+# Created by https://www.gitignore.io/api/netbeans
+# Edit at https://www.gitignore.io/?templates=netbeans
+
+### NetBeans ###
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# End of https://www.gitignore.io/api/netbeans
