@@ -27,7 +27,7 @@
 hs_err_pid*
 
 /BMFarma/dist/
-**/nbproject/private/
+/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
 build/
