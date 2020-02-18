@@ -1,6 +1,7 @@
 package CONTROL;
 
-import FORMULARIOS.ProductosExpres;
+import FORMULARIOS.ProductoExpress;
+
 import GENERICOS.Buscador;
 import GENERICOS.Conexion;
 import GENERICOS.ConexionSP;
@@ -34,7 +35,7 @@ import javax.swing.border.LineBorder;
 
 public class ProductosExpresCtrol {
 
-    private ProductosExpres productoExpres;
+    private ProductoExpress productoExpres;
     private Conexion conec;
     private String sintaxiSql;
     private String MiMsM;
@@ -68,7 +69,17 @@ public class ProductosExpresCtrol {
         porMonto, porcentaje
     };
 
-    private String InsertarCabecera = "CALL Productos_Ins(?,?,?,?,?,?,?);";
+    String InsertarCabecera = "CALL Productos_Ins(?,?,?,?,?,?,?)";
+    /*
+        CREATE DEFINER=`root`@`localhost` PROCEDURE `Productos_Ins`(
+			  p_ProductoDescripcion VARCHAR(45)
+			, p_CodigoBarra VARCHAR(45)
+			, p_Nacionalidad_id INT(11)
+			, p_Presentacion_id INT(11)
+			, p_DivisionLaboratorio_id INT(11)
+			, p_Laboratorio_id INT(11)
+			, p_TipoImpuesto_id INT(11))
+    */
     
     private int condicionVenta = 0;
 
@@ -501,16 +512,16 @@ System.out.println("Inicio Ejecucion altaCabecera()");
             cnn = ConexionSP.Conectar();
             CallableStatement cmst = cnn.prepareCall(InsertarCabecera);
             cmst.setString(1, productoExpres.txtDescripcion.getText().trim());         
-            cmst.setString(2, productoExpres.txtCodigoBarra.getText().trim());            
+            cmst.setInt(2, 1111);            
             cmst.setInt(3, 1); //  productoExpres.txtNacionalidadCodigo.getText().trim());           /*p_Nacionalidad_id INT(11)*/
             cmst.setInt(4, 3) ;//  productoExpres.txtPresentacion.getText().trim());           /*p_Presentacion_id INT(11)*/ 
             cmst.setInt(5, 1);           /*p_DivisionLaboratorio_id INT(11)*/ 
             cmst.setInt(6, 3);                                                            /*, p_Laboratorio_id INT(11)*/ 
             cmst.setInt(7, 5);                                                            /*, p_Laboratorio_id INT(11)*/ 
-            System.out.println("////*****");
+            System.out.println("*****Antescmst");
             System.out.println(cmst);
             
-            System.out.println("////*****");
+            System.out.println("Fincmst*****");
             //cmst.execute();
 
             filasAfectadas =cmst.executeUpdate();
