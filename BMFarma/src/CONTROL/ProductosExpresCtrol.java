@@ -2,15 +2,15 @@ package CONTROL;
 
 import FORMULARIOS.ProductoExpress;
 
-import GENERICOS.Buscador;
+
 import GENERICOS.Conexion;
 import GENERICOS.ConexionSP;
-import GENERICOS.ConstructorTabla;
+
 import GENERICOS.ConstructorCombo;
 import GENERICOS.MIError;
 import GENERICOS.setearObjeto;
 import com.mxrck.autocompleter.TextAutoCompleter;
-import java.awt.Font;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,16 +22,13 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
-import javax.swing.table.TableModel;
+
 import GENERICOS.Utiles;
 import GENERICOS.ValidarVacios;
 import Genericos.FormatoTextos;
 import Genericos.PropiedadesTextos;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
+
+
 
 public class ProductosExpresCtrol {
 
@@ -84,7 +81,7 @@ public class ProductosExpresCtrol {
     private int condicionVenta = 0;
 
     public ProductosExpresCtrol(JDialog dialogoPadre) {
-///        productoExpress = (VentasP) dialogoPadre;
+        productoExpres = (ProductoExpress) dialogoPadre;
         utiles = new Utiles();
         formatoTxt = new FormatoTextos();
         textoVacio =new ValidarVacios();
@@ -92,11 +89,11 @@ public class ProductosExpresCtrol {
     }
 
     public void initControlers() throws MIError {
-        try {
-            HabilitarBotones(estados.activo);
-            HabilitarTexto(estados.inactivo, paneles.todos);
+        
+            //HabilitarBotones(estados.activo);
+            //HabilitarTexto(estados.inactivo, paneles.todos);
             limpiarTexto(paneles.todos);
-            cargarComboFraccion();
+            //cargarComboFraccion();
 
             //Ventas.grlProductos.setModel(tabla);
 //            productoExpress.grlProductos.setModel((TableModel) grilla);
@@ -104,11 +101,8 @@ public class ProductosExpresCtrol {
 
             //utiles.prepararDateField(pedidos.txtFechaFactura);
 ///            productoExpress.txtfFecha.setText(utiles.fechaServidor());
-            itemsAutoCompletado();
-        } catch (MIError ex) {
-            MiMsM = "Ocurrio un error en el metodo  initControlers ";
-            throw new MIError(MiMsM, ex);
-        }
+            //itemsAutoCompletado();
+        
     }
 
     
@@ -502,26 +496,26 @@ public class ProductosExpresCtrol {
     }
    
     public void altaCabecera() throws MIError {
-System.out.println("Inicio Ejecucion altaCabecera()");
         
-    filasAfectadas=1;
         Connection cnn;
         String resultado="";
-        
+        filasAfectadas=1;
+
         try {
             cnn = ConexionSP.Conectar();
             CallableStatement cmst = cnn.prepareCall(InsertarCabecera);
-            cmst.setString(1, productoExpres.txtDescripcion.getText().trim());         
-            cmst.setInt(2, 1111);            
-            cmst.setInt(3, 1); //  productoExpres.txtNacionalidadCodigo.getText().trim());           /*p_Nacionalidad_id INT(11)*/
+            cmst.setString(1, productoExpres.txtDescripcion.getText().trim());                     
+            cmst.setString(2, productoExpres.txtCodigoBarra.getText().trim());            
+            
+            cmst.setInt(3, 1); 
+            //  productoExpres.txtNacionalidadCodigo.getText().trim());           /*p_Nacionalidad_id INT(11)*/
             cmst.setInt(4, 3) ;//  productoExpres.txtPresentacion.getText().trim());           /*p_Presentacion_id INT(11)*/ 
             cmst.setInt(5, 1);           /*p_DivisionLaboratorio_id INT(11)*/ 
             cmst.setInt(6, 3);                                                            /*, p_Laboratorio_id INT(11)*/ 
             cmst.setInt(7, 5);                                                            /*, p_Laboratorio_id INT(11)*/ 
-            System.out.println("*****Antescmst");
+            System.out.println("*****Antescmst******");
             System.out.println(cmst);
-            
-            System.out.println("Fincmst*****");
+            System.out.println("******Fincmst*****");
             //cmst.execute();
 
             filasAfectadas =cmst.executeUpdate();
@@ -540,8 +534,8 @@ System.out.println("Inicio Ejecucion altaCabecera()");
         } catch (SQLException ex) {
             MiMsM = "Ocurrio un error en el metodo alta del Formulario ProductosExpress";
             throw new MIError(MiMsM, ex);
-            //Logger.getLogger(ControlCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            //Logger.getLogger(ControlCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }           
     }
 
 }
