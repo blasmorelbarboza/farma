@@ -72,7 +72,7 @@ public class PedidoInterno extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPedidoId = new javax.swing.JTextField();
-        cboEstadoPedido = new javax.swing.JComboBox<>();
+        cboEstadoPedido = new javax.swing.JComboBox<String>();
         lblEstadoPedido = new javax.swing.JLabel();
         txtfFechaPedido = new javax.swing.JFormattedTextField();
 
@@ -353,7 +353,12 @@ public class PedidoInterno extends javax.swing.JDialog {
 
         jLabel2.setText("Nº PEDIDO");
 
-        cboEstadoPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "SOLICITADO", "RECIBIDO", "ANULADO" }));
+        cboEstadoPedido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PENDIENTE", "SOLICITADO", "RECIBIDO", "ANULADO" }));
+        cboEstadoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEstadoPedidoActionPerformed(evt);
+            }
+        });
 
         lblEstadoPedido.setText("ESTADO");
 
@@ -549,6 +554,10 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar Venta?", "ATE
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         ctrolPedidoInt.eliminarFila();
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void cboEstadoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEstadoPedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboEstadoPedidoActionPerformed
 
     /**
      * @param args the command line arguments

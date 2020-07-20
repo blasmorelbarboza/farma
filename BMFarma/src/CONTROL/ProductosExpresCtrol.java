@@ -51,7 +51,8 @@ public class ProductosExpresCtrol {
     private int filasAfectadas;
 
     public enum tablas {
-        clientes, producto, vendedor, condicionVenta, idVenta
+        producto, vendedor , 
+        Nacionalidad , Presentacion , DivisionLaboratorio, Laboratorio, TipoImpuesto
     };
 
     public enum paneles {
@@ -363,17 +364,18 @@ public class ProductosExpresCtrol {
             conec = new Conexion();
             sintaxiSql = null;
             switch (t) {
-                case clientes:
-                    sintaxiSql = "SELECT Documento,Nombre,Apellido FROM cliente ORDER BY Apellido ;";
-                    break;
-                case producto:
-                    sintaxiSql = "SELECT  id, ProductoDescripcion, PrecioPublico, PrecioCosto FROM producto  ORDER BY id;";
-                    break;
-                    
-                case idVenta:
-                    sintaxiSql =" SELECT MAX(id)+1 FROM ventas;";
-                        break;
+                case TipoImpuesto:
+                    sintaxiSql = "SELECT Id,Descripcion FROM TipoImpuesto ORDER BY 1 ;";
+                    break;                
+//                case producto:
+//                    sintaxiSql = "SELECT  id, ProductoDescripcion, PrecioPublico, PrecioCosto FROM producto  ORDER BY id;";
+//                    break;
+//                    
+//                case idVenta:
+//                    sintaxiSql =" SELECT MAX(id)+1 FROM ventas;";
+//                        break;
             }
+
             ps = conec.getConexion().prepareStatement(sintaxiSql);
             rs = ps.executeQuery();
         } catch (SQLException ex) {
@@ -506,16 +508,14 @@ public class ProductosExpresCtrol {
             CallableStatement cmst = cnn.prepareCall(InsertarCabecera);
             cmst.setString(1, productoExpres.txtDescripcion.getText().trim());                     
             cmst.setString(2, productoExpres.txtCodigoBarra.getText().trim());            
-            
-            cmst.setInt(3, 1); 
-            //  productoExpres.txtNacionalidadCodigo.getText().trim());           /*p_Nacionalidad_id INT(11)*/
+            cmst.setInt(3, 1); //  productoExpres.txtNacionalidadCodigo.getText().trim());           /*p_Nacionalidad_id INT(11)*/
             cmst.setInt(4, 3) ;//  productoExpres.txtPresentacion.getText().trim());           /*p_Presentacion_id INT(11)*/ 
             cmst.setInt(5, 1);           /*p_DivisionLaboratorio_id INT(11)*/ 
             cmst.setInt(6, 3);                                                            /*, p_Laboratorio_id INT(11)*/ 
             cmst.setInt(7, 5);                                                            /*, p_Laboratorio_id INT(11)*/ 
-            System.out.println("*****Antescmst******");
-            System.out.println(cmst);
-            System.out.println("******Fincmst*****");
+//            System.out.println("*****Antescmst******");
+//            System.out.println(cmst);
+//            System.out.println("******Fincmst*****");
             //cmst.execute();
 
             filasAfectadas =cmst.executeUpdate();
@@ -525,7 +525,7 @@ public class ProductosExpresCtrol {
             } else 
             {
                 resultado = "Los datos se NO ingresaron!!!altaCabecera - Productos Express";
-                System.out.println("else"+filasAfectadas);
+                System.out.println("else  "+filasAfectadas+"  FilasAfectadas");
                 JOptionPane.showMessageDialog(productoExpres, resultado);
             }            
             
