@@ -4,7 +4,7 @@ import FORMULARIOS.ProductoExpress;
 
 
 import GENERICOS.Conexion;
-import GENERICOS.ConexionSP;
+// import GENERICOS.ConexionSP;
 
 import GENERICOS.ConstructorCombo;
 import GENERICOS.MIError;
@@ -412,12 +412,16 @@ public class ProductosExpresCtrol {
         try {
             sintaxiSql = null;
             switch (tcbo) {
-                case vendedor:
-                    sintaxiSql = "SELECT id, Nombres FROM empleado ORDER BY id;";
+                case Nacionalidad:
+                    //sintaxiSql = "SELECT id, Nombres FROM empleado ORDER BY id;";
                     break;
-                case condicionVenta:
-                    sintaxiSql = "SELECT ID, Descripcion FROM condicionventa ORDER BY 1;";
+                case Presentacion:
+                    //sintaxiSql = "SELECT ID, Descripcion FROM condicionventa ORDER BY 1;";
                     break;
+                    
+                case TipoImpuesto:
+                   // sintaxiSql = "SELECT ID, Descripcion FROM condicionventa ORDER BY 1;";
+                    break;    
             }
             conec = new Conexion();
             ps = conec.getConexion().prepareStatement(sintaxiSql);
@@ -476,7 +480,7 @@ public class ProductosExpresCtrol {
         try {
 
             switch (t) {
-                case clientes:
+                case Nacionalidad:
 
                     sintaxiSql = "SELECT Documento,Nombre,Apellido "
                             + "FROM cliente WHERE Documento='" + productoExpres.txtCodigo.getText().trim() + "'  ORDER BY Apellido ;";

@@ -11,23 +11,56 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class Conexion {
-    private Connection Conexion = null;
+public class ConexionPrepareCall {
+    static Connection Conexion = null;
     private String miError;
 //    private final String ControladorBD = "org.postgresql.Driver";
-    private final String ControladorBD = "com.mysql.jdbc.Driver";
+    static String ControladorBD = "com.mysql.jdbc.Driver";
+    
+    //Class.forName("com.mysql.jdbc.Driver");
 
-    private final String baseDatos = "bmfarmaciv";
-    private final String usuario = "root";
-    private final String password = "";
+    static String baseDatos = "bmfarmaciv";
+    static String usuario = "root";
+    static String password = "";
  
     private ResultSet ResultSet;
     public boolean conectado = false;
+    static String url = "jdbc:mysql://localhost/" + baseDatos;
 
+    
+    
+public static Connection Conectar(){  
+            /**
+             * El Metodo Conectar() Enfocado para Uso de Procedimientos Almacenados
+             */
+            
+            try{
+            
+            Class.forName(ControladorBD);
+            Conexion=DriverManager.getConnection(url,usuario,password);
+            
+           }catch(ClassNotFoundException cnfex){
+    JOptionPane.showMessageDialog(null, "ConexionMySQL:     ClassNotFoundException " +cnfex.getMessage());
+           }catch(SQLException sqlex){
+    JOptionPane.showMessageDialog(null, "ConexionMySQL:     SQLException " +sqlex.getMessage());
+           }catch(Exception ex){
+    JOptionPane.showMessageDialog(null, "ConexionMySQL:     Exception   " +ex.getMessage());
+           }
+            return Conexion;
+
+      }
+
+
+/**
+ 
+ */
+    
     //constructor que recibe los parametros para conectarse a la base de datos
-    public Conexion() {
+    public ConexionPrepareCall() {
 //        String url = "jdbc:postgresql://localhost:5432/" + baseDatos;
-        String url = "jdbc:mysql://localhost/" + baseDatos;
+        
+        
+        
         try {
             Class.forName(ControladorBD);
             Conexion = DriverManager.getConnection(url, usuario, password);
@@ -45,8 +78,12 @@ public class Conexion {
         }
     }
 
+
     
     public Connection getConexion() {
+    /**
+     * El Metodo getConexion() Enfocado para que java Realice el control Secion COMIT/ROLLBACK 
+     */
         return Conexion;
     }
 
@@ -84,7 +121,7 @@ public class Conexion {
         try {
             Conexion.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionPrepareCall.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,7 +129,15 @@ public class Conexion {
         try {
             Conexion.rollback();
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionPrepareCall.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     *
+     * @return
+     */
+    
+    
+    
 }

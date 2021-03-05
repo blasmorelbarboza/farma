@@ -5,7 +5,7 @@
  */
 package FORMULARIOS;
 
-import CONTROL.ProductosExpresCtrol;
+import CONTROL.ProductosExpressCtrol;
 import GENERICOS.MIError;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author blasm
  */
 public class ProductoExpress extends javax.swing.JDialog {
-    private ProductosExpresCtrol ctrolProductosExpres;
+    private ProductosExpressCtrol ctrolProductosExpres;
     //private PedidoInternoCtrol ctrolPedidoInt;
     
 
@@ -26,7 +26,7 @@ public class ProductoExpress extends javax.swing.JDialog {
     public ProductoExpress(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ctrolProductosExpres = new ProductosExpresCtrol(this); /*OJO coodina con el Jdialog y la clase ctrol*/
+        ctrolProductosExpres = new ProductosExpressCtrol(this); /*OJO coodina con el Jdialog y la clase ctrol*/
     }
 
     /**
@@ -63,7 +63,7 @@ public class ProductoExpress extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        cboIva = new javax.swing.JComboBox();
         txtCodigoItem = new javax.swing.JTextField();
         txtStockInicial = new javax.swing.JTextField();
         jComboBox4 = new javax.swing.JComboBox();
@@ -115,7 +115,7 @@ public class ProductoExpress extends javax.swing.JDialog {
 
         jLabel4.setText("LINEA");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboIva.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtCodigoItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +180,7 @@ public class ProductoExpress extends javax.swing.JDialog {
                                         .addGap(18, 18, 18)))
                                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNacionalidad, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboIva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtLinea, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
                             .addComponent(cboPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(txtDescripcion))
@@ -226,7 +226,7 @@ public class ProductoExpress extends javax.swing.JDialog {
                     .addComponent(jLabel10)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -337,7 +337,7 @@ public class ProductoExpress extends javax.swing.JDialog {
 int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?", "ATENCION", JOptionPane.YES_NO_OPTION);
         if (mensaje == JOptionPane.YES_OPTION) {
                  try {                        
-                     ctrolProductosExpres.altaCabecera();
+                     ctrolProductosExpres.alta();
                      System.out.println(" Se guardo los datos.. Se estima Utilizar el Metodo altaCabecera()");   
                      
                 } catch (MIError ex) {
@@ -358,12 +358,9 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        try {
-            //limpiarTexto(paneles p)
-            ctrolProductosExpres.limpiarTexto(ProductosExpresCtrol.paneles.todos);
-        } catch (MIError ex) {
-            Logger.getLogger(ProductoExpress.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        //ctrolProductosExpres.limpiarTexto(ProductosExpresCtrol.paneles.todos);
+        
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -425,10 +422,10 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox cboFraccion;
+    public javax.swing.JComboBox cboIva;
     public javax.swing.JComboBox cboPresentacion;
     public javax.swing.JCheckBox chkAgregando;
     public javax.swing.JComboBox jComboBox1;
-    public javax.swing.JComboBox jComboBox3;
     public javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
