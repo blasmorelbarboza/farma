@@ -103,8 +103,6 @@ public class ProductoExpress extends javax.swing.JDialog {
 
         jLabel5.setText("STOCK INICIAL");
 
-        cboFraccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel14.setText("COD ITEM");
 
         jLabel13.setText("TIPO");
@@ -115,8 +113,6 @@ public class ProductoExpress extends javax.swing.JDialog {
 
         jLabel4.setText("LINEA");
 
-        cboIva.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         txtCodigoItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoItemActionPerformed(evt);
@@ -124,8 +120,6 @@ public class ProductoExpress extends javax.swing.JDialog {
         });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cboPresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnlProductosLayout = new javax.swing.GroupLayout(pnlProductos);
         pnlProductos.setLayout(pnlProductosLayout);
@@ -336,9 +330,11 @@ public class ProductoExpress extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?", "ATENCION", JOptionPane.YES_NO_OPTION);
         if (mensaje == JOptionPane.YES_OPTION) {
-                 try {                        
+                 try {   
+                     /*Funcionan El metodo Alta() Falta Programar para 
+                     que tome los Cbobox, texbox, etc...*/
                      ctrolProductosExpres.alta();
-                     System.out.println(" Se guardo los datos.. Se estima Utilizar el Metodo altaCabecera()");   
+                     //System.out.println(" Se guardo los datos.. Se estima Utilizar el Metodo altaCabecera()");   
                      
                 } catch (MIError ex) {
                     Logger.getLogger(ProductoExpress.class.getName()).log(Level.SEVERE, null, ex);

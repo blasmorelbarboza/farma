@@ -48,13 +48,13 @@ private ConstructorCombo constuirCbo;
         String resultado;
         
         /** Recibe los parametros `bmfarmaciv`.`ProductoExp_Ins`(
-		p_ProductoDescripcion VARCHAR(45)
-		, p_CodigoBarra VARCHAR(45)
-		, p_Nacionalidad_id INT(11)
-		, p_Presentacion_id INT(11)
-		, p_DivisionLaboratorio_id INT(11)
-		, p_Laboratorio_id INT(5)
-		, p_TipoImpuesto_id INT(11)
+		p_ProductoDescripcion VARCHAR(45)-1*
+		, p_CodigoBarra VARCHAR(45)-2*
+		, p_Nacionalidad_id INT(11)-3*
+		, p_Presentacion_id INT(11)-4*
+		, p_DivisionLaboratorio_id INT(11)-5
+		, p_Laboratorio_id INT(5)-6
+		, p_TipoImpuesto_id INT(11)-7
 		) */
          
         
@@ -65,21 +65,24 @@ private ConstructorCombo constuirCbo;
            cmst.setInt    (2,Integer.parseInt(producto.txtCodigoBarra.getText()));
            cmst.setInt    (3,Integer.parseInt(producto.txtNacionalidadCodigo.getText()));
            cmst.setInt    (4,Integer.parseInt(producto.txtPresentacion.getText()));
-           cmst.setInt    (5,Integer.parseInt(producto.txtCodigo.getText()));
-           cmst.setInt    (6,Integer.parseInt(producto.txtCodigo.getText()));
-           // cmst.setInt    (7,Integer.parseInt(producto.cboIva.));
+           cmst.setInt    (5,999);
+           cmst.setInt    (6,999);
+           cmst.setInt    (7,5 );/*Integer.parseInt(producto.cboIva.)*/
 
            cmst.execute();  
                               
            resultado="Los datos se ingresaron exitosamente !!!";
            JOptionPane.showMessageDialog(producto, resultado);
-           conec.desConectarBD();   
+//           conec.desConectarBD();   
            
         } catch (SQLException ex) {
             MiMsM = "Ocurrio un error en el metodo alta de la tabla Laboratorio ";
             throw new MIError(MiMsM, ex);
             //Logger.getLogger(ControlCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
+           
+        
+        
     }
 //            public void baja() throws MIError {
 //        Connection cnn;   
