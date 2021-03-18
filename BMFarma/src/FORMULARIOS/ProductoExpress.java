@@ -27,6 +27,7 @@ public class ProductoExpress extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ctrolProductosExpres = new ProductosExpressCtrol(this); /*OJO coodina con el Jdialog y la clase ctrol*/
+        ctrolProductosExpres.initControles();
     }
 
     /**
@@ -60,13 +61,13 @@ public class ProductoExpress extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         txtLinea = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cboTipoProducto = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cboIva = new javax.swing.JComboBox();
         txtCodigoItem = new javax.swing.JTextField();
         txtStockInicial = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox();
+        cboNacionalidad = new javax.swing.JComboBox();
         txtNacionalidadCodigo = new javax.swing.JTextField();
         cboPresentacion = new javax.swing.JComboBox();
         pnlBotones = new javax.swing.JPanel();
@@ -91,7 +92,7 @@ public class ProductoExpress extends javax.swing.JDialog {
 
         jLabel11.setText("DESCUENTO");
 
-        jLabel12.setText("FRACCION");
+        jLabel12.setText("FRACCIONADO en:");
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +108,11 @@ public class ProductoExpress extends javax.swing.JDialog {
 
         jLabel13.setText("TIPO");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTipoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTipoProductoActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("IVA");
 
@@ -119,7 +124,11 @@ public class ProductoExpress extends javax.swing.JDialog {
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNacionalidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNacionalidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlProductosLayout = new javax.swing.GroupLayout(pnlProductos);
         pnlProductos.setLayout(pnlProductosLayout);
@@ -142,22 +151,23 @@ public class ProductoExpress extends javax.swing.JDialog {
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlProductosLayout.createSequentialGroup()
                         .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigoBarra, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(txtCodigoBarra, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                             .addComponent(txtPrecio)
                             .addComponent(txtDescuento)
                             .addComponent(txtPresentacion)
-                            .addComponent(txtFraccion)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboTipoProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCodigo)
                             .addComponent(txtStockInicial)
-                            .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cboNacionalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlProductosLayout.createSequentialGroup()
+                                .addComponent(txtFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboFraccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pnlProductosLayout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoItem, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+                                .addComponent(txtCodigoItem, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProductosLayout.createSequentialGroup()
                                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlProductosLayout.createSequentialGroup()
@@ -176,7 +186,8 @@ public class ProductoExpress extends javax.swing.JDialog {
                                     .addComponent(txtNacionalidad, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(cboIva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtLinea, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
-                            .addComponent(cboPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cboPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboFraccion, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(txtDescripcion))
                 .addGap(22, 22, 22))
         );
@@ -206,14 +217,14 @@ public class ProductoExpress extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNacionalidadCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -371,6 +382,14 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
         
     }//GEN-LAST:event_chkAgregandoActionPerformed
 
+    private void cboTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTipoProductoActionPerformed
+
+    private void cboNacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNacionalidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboNacionalidadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -419,10 +438,10 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox cboFraccion;
     public javax.swing.JComboBox cboIva;
+    public javax.swing.JComboBox cboNacionalidad;
     public javax.swing.JComboBox cboPresentacion;
+    public javax.swing.JComboBox cboTipoProducto;
     public javax.swing.JCheckBox chkAgregando;
-    public javax.swing.JComboBox jComboBox1;
-    public javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

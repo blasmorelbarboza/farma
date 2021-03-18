@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ProductosExpressCtrol {
    
 private ProductoExpress producto;           
-public enum tablas{laboratorio, tipoimpuesto, nacionalidad, presentacion };
+public enum tablas{laboratorio, tipoimpuesto, nacionalidad, presentacion, tipoproducto };
 
 private ConexionPrepareCall conec;  
 private String MiMsM;
@@ -26,10 +26,12 @@ private PreparedStatement preparedStatement;
 private ResultSet rs;
 
 String InsertarQuery="CALL ProductoExp_Ins(?,?,?,?,?,?,?)";      
-String BorrarQuery="CALL ProductoEx_Del(?)";      
-String EditarQuery="CALL ProductoEx_Upd(?,?)";      
 
-private ConstructorCombo constuirCbo;
+
+private ConstructorCombo constuirCboNacionalidad;
+private ConstructorCombo constuirCboIva;
+private ConstructorCombo constuirCboPresentacion;
+private ConstructorCombo constuirCboTipoProducto;
 
     public ProductosExpressCtrol(JDialog dialogoPadre){
       producto = (ProductoExpress) dialogoPadre;
@@ -37,10 +39,10 @@ private ConstructorCombo constuirCbo;
     }
     
     public void initControles(){
-
-                
+        usarCombos();
         producto.btnCancelar.doClick();
     }
+    
     
     
     public void alta() throws MIError {
@@ -63,17 +65,17 @@ private ConstructorCombo constuirCbo;
            CallableStatement cmst= cnn.prepareCall(InsertarQuery);
            cmst.setString (1,producto.txtDescripcion.getText().trim() );
            cmst.setInt    (2,Integer.parseInt(producto.txtCodigoBarra.getText()));
-           cmst.setInt    (3,Integer.parseInt(producto.txtNacionalidadCodigo.getText()));
-           cmst.setInt    (4,Integer.parseInt(producto.txtPresentacion.getText()));
+           cmst.setInt    (3, constuirCboNacionalidad.getCodigoActual(producto.cboNacionalidad.getSelectedIndex()));
+           cmst.setInt    (4, constuirCboPresentacion.getCodigoActual(producto.cboPresentacion.getSelectedIndex()));
            cmst.setInt    (5,999);
            cmst.setInt    (6,999);
-           cmst.setInt    (7,5 );/*Integer.parseInt(producto.cboIva.)*/
+           cmst.setInt    (7,constuirCboIva.getCodigoActual(producto.cboIva.getSelectedIndex()));
 
            cmst.execute();  
                               
            resultado="Los datos se ingresaron exitosamente !!!";
            JOptionPane.showMessageDialog(producto, resultado);
-//           conec.desConectarBD();   
+           conec.desConectarBD();   
            
         } catch (SQLException ex) {
             MiMsM = "Ocurrio un error en el metodo alta de la tabla Laboratorio ";
@@ -84,26 +86,7 @@ private ConstructorCombo constuirCbo;
         
         
     }
-//            public void baja() throws MIError {
-//        Connection cnn;   
-//        String resultado;
-//        try {
-//            cnn=ConexionPrepareCall.Conectar();
-//           CallableStatement cmst= cnn.prepareCall(BorrarQuery);
-//           cmst.setInt(1,Integer.parseInt( producto.txtCodigo.getText()));
-//
-//           cmst.execute();  
-//            
-//           resultado="Los datos borrados exitosamente !!!";
-//           JOptionPane.showMessageDialog(producto, resultado);
-//           cnn.close();   
-//           
-//        } catch (SQLException ex) {
-//            MiMsM = "Ocurrio un error en el metodo baja de la tabla Laboratorio ";
-//            throw new MIError(MiMsM, ex);
-//            //Logger.getLogger(ControlCiudad.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+
     
 //        public void modificacion() throws MIError {
 //        Connection cnn;    
@@ -158,6 +141,9 @@ private ConstructorCombo constuirCbo;
     
     
         private ResultSet resulseCbo(tablas tcbo) throws MIError {
+            // conec.Conectar();
+            
+           
         try {
             sintaxiSql = null;
             switch (tcbo) {
@@ -173,8 +159,11 @@ private ConstructorCombo constuirCbo;
                 case nacionalidad:
                     sintaxiSql = "SELECT id, Descripcion FROM nacionalidad ORDER BY id;";
                     break;    
+                case tipoproducto:
+                    sintaxiSql = "SELECT id, Descripcion FROM tipoproducto ORDER BY id;";
+                    break;       
             }
-            //conec = new Conexion();
+            conec = new ConexionPrepareCall();
             preparedStatement = conec.getConexion().prepareStatement(sintaxiSql);
             rs = preparedStatement.executeQuery();
         } catch (SQLException ex) {
@@ -184,17 +173,49 @@ private ConstructorCombo constuirCbo;
         return rs;
     }
     
-        public void cargarCombos() {
-        try {
-            constuirCbo = new ConstructorCombo(resulseCbo(tablas.tipoimpuesto));
+        public void usarCombos() {
+                try {
+                    constuirCboTipoProducto = new ConstructorCombo(resulseCbo(tablas.tipoproducto));
+                } catch (MIError ex) {
+                    Logger.getLogger(ProductosExpressCtrol.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                for (int i = 0; i < constuirCboTipoProducto.getRegistrosCombo().size(); i++) {
+                    producto.cboTipoProducto.addItem(constuirCboTipoProducto.getRegistrosCombo().get(i).getDesCombo());
+                }
 
-            for (int i = 0; i < constuirCbo.getRegistrosCombo().size(); i++) {
-                producto.cboIva.addItem(constuirCbo.getRegistrosCombo().get(i).getDesCombo());
-            }
-        } catch (MIError ex) {
-            Logger.getLogger(VentasCtrol.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    constuirCboIva = new ConstructorCombo(resulseCbo(tablas.tipoimpuesto));
+                } catch (MIError ex) {
+                    Logger.getLogger(ProductosExpressCtrol.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (int i = 0; i < constuirCboIva.getRegistrosCombo().size(); i++) {
+                    producto.cboIva.addItem(constuirCboIva.getRegistrosCombo().get(i).getDesCombo());
+                }
+
+                try {
+                    constuirCboPresentacion = new ConstructorCombo(resulseCbo(tablas.presentacion));
+                } catch (MIError ex) {
+                    Logger.getLogger(ProductosExpressCtrol.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    for (int i = 0; i < constuirCboPresentacion.getRegistrosCombo().size(); i++) {
+                        producto.cboPresentacion.addItem(constuirCboPresentacion.getRegistrosCombo().get(i).getDesCombo());
+                }
+                try {
+
+                constuirCboNacionalidad = new ConstructorCombo(resulseCbo(tablas.nacionalidad));
+                for (int i = 0; i < constuirCboNacionalidad.getRegistrosCombo().size(); i++) {
+                    producto.cboNacionalidad.addItem(constuirCboNacionalidad.getRegistrosCombo().get(i).getDesCombo());
+                }
+
+
+                } catch (MIError ex) {
+                    Logger.getLogger(ProductosExpressCtrol.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
         }
-    }
+        
+
     
      private ResultSet cargarGrilla()    {
          conec =new ConexionPrepareCall();
