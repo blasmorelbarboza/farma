@@ -57,5 +57,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/BMFarma/nbproject/private/private.xml
 
 # End of https://www.gitignore.io/api/netbeans
