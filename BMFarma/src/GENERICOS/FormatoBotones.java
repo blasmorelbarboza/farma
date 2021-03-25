@@ -32,7 +32,7 @@ public class FormatoBotones {
     }
 
     public enum opcionesBotones {
-        Agregar, Modificar, Eliminar, Grabar, Cancelar,Reporte,Ayuda
+        Agregar, Modificar, Eliminar, Grabar, Cancelar,Reporte,Ayuda, Volver
     };
 
     private ArrayList<JButton> arrayBotones;
@@ -55,6 +55,7 @@ public class FormatoBotones {
                     jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/actualizar.png")));
                     jButton.setMnemonic('M');
                     jButton.setToolTipText("Modificar Registro");
+                    
                     break;
                 case Eliminar:
                     jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/eliminar.png")));
@@ -66,6 +67,13 @@ public class FormatoBotones {
                     jButton.setMnemonic('C');
                     jButton.setToolTipText("Cancelar Operacion");
                     break;
+                case Volver:
+                    jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Volver.png")));
+                    jButton.setMnemonic('V');
+                    jButton.setToolTipText("Opcion Anterior");
+                    break;
+                    
+                    
                 case Grabar:
                     jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/guardar.png")));
                     jButton.setMnemonic('G');
@@ -97,9 +105,10 @@ public class FormatoBotones {
             case profesional:
                 for (JButton jButton : arrayBotones) {
                     jButton.setBackground(new java.awt.Color(44, 80, 152));
-                    jButton.setFont(new java.awt.Font("Arial", 1, 12));
+                    jButton.setFont(new java.awt.Font("Arial", 1, 14));
                     jButton.setForeground(new java.awt.Color(255, 255, 255));
                     jButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                    
                 }
                 break;
         }

@@ -19,6 +19,8 @@ public class ConstructorCombo {
     
     
     public ConstructorCombo(ResultSet cursor) throws MIError{
+        /**Carga el Combo Recibe Resulter Con la Sentencia
+         */
         try {
             datos = new ArrayList<>();
             datos.add(new registrosTabla(0, "<No Seleccionado>"));
@@ -34,7 +36,11 @@ public class ConstructorCombo {
         return datos;
     }
 
+    
     public Integer getCodigoActual(int indice) {
+     /**
+     * getCodigoActual Recupera actual del Combo
+     */
         if (indice != -1) {
             return datos.get(indice).getCodCombo();
         }
