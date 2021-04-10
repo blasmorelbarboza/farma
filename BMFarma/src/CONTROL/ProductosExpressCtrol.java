@@ -25,7 +25,13 @@ public class ProductosExpressCtrol {
 
     public enum tablas {
 
-        laboratorio, tipoimpuesto, nacionalidad, presentacion, tipoproducto, fraccion
+        laboratorio, 
+        divisionlaboratorio, 
+        tipoimpuesto, 
+        nacionalidad, 
+        presentacion, 
+        tipoproducto, 
+        fraccion
     };
 
     private ConexionPrepareCall conec;
@@ -44,6 +50,9 @@ public class ProductosExpressCtrol {
     private ConstructorCombo constuirCboPresentacion;
     private ConstructorCombo constuirCboTipoProducto;
     private ConstructorCombo constuirCboFraccionar;
+    
+    private ConstructorCombo constuirCboLaboratorio;
+    private ConstructorCombo constuirCboDivisionLaboratorio;
 
     public ProductosExpressCtrol(JDialog dialogoPadre) {
         producto = (ProductoExpress) dialogoPadre;
@@ -109,6 +118,10 @@ public class ProductosExpressCtrol {
                 case laboratorio:
                     sintaxiSql = "SELECT id, NombreLaboratorio  FROM laboratorio ORDER BY id;";
                     break;
+                case divisionlaboratorio:
+                    //sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio ORDER BY id;";
+                    sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio WHERE Laboratorio_id=999 ORDER BY id;";
+                    break;    
                 case tipoimpuesto:
                     sintaxiSql = "SELECT id,Descripcion FROM tipoimpuesto ORDER BY id;";
                     break;
@@ -179,6 +192,16 @@ public class ProductosExpressCtrol {
             constuirCboFraccionar = new ConstructorCombo(resulseCbo(tablas.fraccion));
             for (int i = 0; i < constuirCboFraccionar.getRegistrosCombo().size(); i++) {
                 producto.cboFraccion.addItem(constuirCboFraccionar.getRegistrosCombo().get(i).getDesCombo());
+            }
+            
+            constuirCboLaboratorio = new ConstructorCombo(resulseCbo(tablas.laboratorio));
+            for (int i = 0; i < constuirCboLaboratorio.getRegistrosCombo().size(); i++) {
+                producto.cboLaboratorio.addItem(constuirCboLaboratorio.getRegistrosCombo().get(i).getDesCombo());
+            }
+            
+            constuirCboDivisionLaboratorio = new ConstructorCombo(resulseCbo(tablas.divisionlaboratorio));
+            for (int i = 0; i < constuirCboDivisionLaboratorio.getRegistrosCombo().size(); i++) {
+                producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getRegistrosCombo().get(i).getDesCombo());
             }
 
         } catch (Exception e) {
