@@ -16,9 +16,10 @@ import javax.swing.JOptionPane;
  * @author blasm
  */
 public class ProductoExpress extends javax.swing.JDialog {
+
     private ProductosExpressCtrol ctrolProductosExpres;
     //private PedidoInternoCtrol ctrolPedidoInt;
-    
+    public int idDivisionLab=0;
 
     /**
      * Creates new form ProductoExpress
@@ -27,7 +28,9 @@ public class ProductoExpress extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ctrolProductosExpres = new ProductosExpressCtrol(this); /*OJO coodina con el Jdialog y la clase ctrol*/
+
         ctrolProductosExpres.initControles();
+        
     }
 
     /**
@@ -132,6 +135,17 @@ public class ProductoExpress extends javax.swing.JDialog {
         });
 
         lblLaboratorio.setText("LABORATORIO");
+
+        cboLaboratorio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboLaboratorioItemStateChanged(evt);
+            }
+        });
+        cboLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLaboratorioActionPerformed(evt);
+            }
+        });
 
         lblDivision.setText("DIVISION");
 
@@ -323,10 +337,9 @@ public class ProductoExpress extends javax.swing.JDialog {
             .addGroup(pnlBotonesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar)
-                    .addGroup(pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnVolver)
-                        .addComponent(btnCancelar)))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkAgregando, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -365,35 +378,34 @@ public class ProductoExpress extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCodigoItemActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?", "ATENCION", JOptionPane.YES_NO_OPTION);
+        int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?", "ATENCION", JOptionPane.YES_NO_OPTION);
         if (mensaje == JOptionPane.YES_OPTION) {
-                 try {   
-                     /*Funcionan El metodo Alta() Falta Programar para 
-                     que tome los Cbobox, texbox, etc...*/
-                     ctrolProductosExpres.alta();
+            try {
+                /*Funcionan El metodo Alta() Falta Programar para 
+                 que tome los Cbobox, texbox, etc...*/
+                ctrolProductosExpres.alta();
                      //System.out.println(" Se guardo los datos.. Se estima Utilizar el Metodo altaCabecera()");   
-                     
-                } catch (MIError ex) {
-                    Logger.getLogger(ProductoExpress.class.getName()).log(Level.SEVERE, null, ex);
-                }            
+
+            } catch (MIError ex) {
+                Logger.getLogger(ProductoExpress.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             System.out.println("Los datos se NO ingresaron!!!");
         }
-                
-        if (chkAgregando.isSelected()){
-                    txtCodigo.setText("0");                              
+
+        if (chkAgregando.isSelected()) {
+            txtCodigo.setText("0");
         } else {
             btnCancelar.doClick();
             btnVolver.doClick();
-            
+
         }
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         //ctrolProductosExpres.limpiarTexto(ProductosExpresCtrol.paneles.todos);
-        
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -404,8 +416,7 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
 
     private void chkAgregandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAgregandoActionPerformed
 
-        
-        
+
     }//GEN-LAST:event_chkAgregandoActionPerformed
 
     private void cboTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoProductoActionPerformed
@@ -419,6 +430,29 @@ int mensaje = JOptionPane.showConfirmDialog(this, "Desea Registrar El PRODUCTO?"
     private void chkFraccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFraccionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkFraccionarActionPerformed
+
+    private void cboLaboratorioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLaboratorioItemStateChanged
+        //if (evt.getStateChange() == ItemEvent.SELECTED) {     /*Error.Adiona 1 al Itemdex*/
+            //if (this.cboLaboratorio.getSelectedIndex()>0) {  /*Carga Cuando Esta Seleccionado>0*/
+                try {
+//                ctrolProductosExpres.initControles();
+                    idDivisionLab=cboLaboratorio.getSelectedIndex();
+                            
+                ctrolProductosExpres.usarCombosDependientes(idDivisionLab);
+                } catch (MIError ex) {
+                    Logger.getLogger(ProductoExpress.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            //}
+            
+
+        //}
+
+
+    }//GEN-LAST:event_cboLaboratorioItemStateChanged
+
+    private void cboLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLaboratorioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -41,6 +41,7 @@ public class ProductosExpressCtrol {
     private ResultSet rs;
 
     String InsertarQuery = "CALL ProductoExp_Ins(?,?,?,?,?,?,?)";
+//    public int idComboDivision=0; 
     
     private FormatoBotones formatearBotones;
     private FormatoVentanas formatearVentanas;
@@ -63,6 +64,7 @@ public class ProductosExpressCtrol {
         
         formatearVentanas=new FormatoVentanas(producto, FormatoVentanas.tipoVentana.estandard);
         
+        producto.chkAgregando.doClick();
         try {
             usarCombos();
             formatoBoton();            
@@ -109,6 +111,38 @@ public class ProductosExpressCtrol {
 
     }
 
+    public ResultSet resulseCboFiltros(tablas tcbo, int id) throws MIError {
+        // conec.Conectar();
+
+        sintaxiSql = null;
+        try {
+            //sintaxiSql = null;
+            switch (tcbo) {
+                
+                case divisionlaboratorio:
+                    //sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio ORDER BY id;";
+                    sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio WHERE Laboratorio_id= ? ORDER BY id;";
+                    
+                    break;    
+                   
+                    //
+            }
+// cmst.setInt(4, constuirCboPresentacion.getCodigoActual(producto.cboPresentacion.getSelectedIndex()));            
+            conec = new ConexionPrepareCall();
+            
+            //idComboDivision= constuirCboPresentacion.getCodigoActual(producto.cboLaboratorio.getSelectedIndex());
+            //idComboDivision=id;
+            preparedStatement = conec.getConexion().prepareStatement(sintaxiSql);
+            preparedStatement.setInt(1, id);
+            
+            rs = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            MiMsM = "Ocurrio un error en el  resulseCboFiltros ";
+            throw new MIError(MiMsM, ex);
+        }
+        return rs;
+    }
+    
     private ResultSet resulseCbo(tablas tcbo) throws MIError {
         // conec.Conectar();
 
@@ -118,10 +152,10 @@ public class ProductosExpressCtrol {
                 case laboratorio:
                     sintaxiSql = "SELECT id, NombreLaboratorio  FROM laboratorio ORDER BY id;";
                     break;
-                case divisionlaboratorio:
-                    //sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio ORDER BY id;";
-                    sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio WHERE Laboratorio_id=999 ORDER BY id;";
-                    break;    
+//                case divisionlaboratorio:
+//                    sintaxiSql = "SELECT id, NombreDivision FROM divisionlaboratorio ORDER BY id;";
+//                    
+//                    break;    
                 case tipoimpuesto:
                     sintaxiSql = "SELECT id,Descripcion FROM tipoimpuesto ORDER BY id;";
                     break;
@@ -166,6 +200,35 @@ public class ProductosExpressCtrol {
 
     }
     
+       public void usarCombosDependientes(int filtroCombo) throws MIError {
+           
+           //idComboDivision=producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getCodigoActual(i));
+           //System.out.println("idComboDivision:"+ idComboDivision);
+        try {
+       
+            //int laboratorioId=999;
+            producto.cboDivisionLab.removeAllItems();
+           
+            constuirCboDivisionLaboratorio = new ConstructorCombo(resulseCboFiltros(tablas.divisionlaboratorio, filtroCombo));         
+          
+            // removeAllItems()
+//          for (int i = 0; i <        constuirCboTipoProducto.getRegistrosCombo().size(); i++) {                    
+            for (int i = 0; i < constuirCboDivisionLaboratorio.getRegistrosCombo().size(); i++) {
+                
+                producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getRegistrosCombo().get(i).getDesCombo());
+                  
+                //producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getCodigoActual(i));
+                  //getCodigoActual
+
+            }
+
+        } catch (Exception e) {
+            MiMsM = "Ocurrio un error usarCombosDependientes";
+            throw new MIError(MiMsM, e);
+        }
+
+    }
+    
     private void usarCombos() throws MIError {
 
         try {
@@ -199,10 +262,10 @@ public class ProductosExpressCtrol {
                 producto.cboLaboratorio.addItem(constuirCboLaboratorio.getRegistrosCombo().get(i).getDesCombo());
             }
             
-            constuirCboDivisionLaboratorio = new ConstructorCombo(resulseCbo(tablas.divisionlaboratorio));
-            for (int i = 0; i < constuirCboDivisionLaboratorio.getRegistrosCombo().size(); i++) {
-                producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getRegistrosCombo().get(i).getDesCombo());
-            }
+//            constuirCboDivisionLaboratorio = new ConstructorCombo(resulseCbo(tablas.divisionlaboratorio));
+//            for (int i = 0; i < constuirCboDivisionLaboratorio.getRegistrosCombo().size(); i++) {
+//                producto.cboDivisionLab.addItem(constuirCboDivisionLaboratorio.getRegistrosCombo().get(i).getDesCombo());
+//            }
 
         } catch (Exception e) {
             MiMsM = "Ocurrio un error usarCombos";

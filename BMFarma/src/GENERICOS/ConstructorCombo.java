@@ -19,7 +19,7 @@ public class ConstructorCombo {
     
     
     public ConstructorCombo(ResultSet cursor) throws MIError{
-        /**Carga el Combo Recibe Resulter Con la Sentencia
+        /**Carga el Combo Recibe ResultSet Con la Sentencia
          */
         try {
             datos = new ArrayList<>();
