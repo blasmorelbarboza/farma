@@ -6,7 +6,6 @@ import GENERICOS.ConexionPrepareCall;
 
 import FORMULARIOS.ProductoExpress;
 import GENERICOS.ConstructorCombo;
-import GENERICOS.ConstructorTabla;
 import GENERICOS.MIError;
 import genericos.FormatoBotones;
 import genericos.FormatoBotones.opcionesBotones;
